@@ -49,7 +49,7 @@ int main(void) {
 	std::string file_path(fname_buffer);
 	file_path.erase(file_path.end()-12, file_path.end());
 
-	file_path += "measdata";
+	file_path += "measData";
 	std::ofstream f;
 	f.open(file_path, std::ios::trunc);
 	if (f.is_open()) {
