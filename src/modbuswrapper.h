@@ -5,7 +5,7 @@
 
 class ModBusWrapper {
 	public:
-		ModBusWrapper(string, int)
+		ModBusWrapper(string, int, int)
 		~ModBusWrapper();
 		void readRegisters(int, int, *float);
 	private:
