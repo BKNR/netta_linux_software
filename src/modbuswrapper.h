@@ -3,6 +3,8 @@
 
 #include se_oikee_modbus.h
 
+/* HV t. Kikki-Hiiri */
+
 class ModBusWrapper {
 	public:
 		ModBusWrapper(string, int, int)
