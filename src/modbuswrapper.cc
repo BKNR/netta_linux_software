@@ -13,7 +13,7 @@ ModBusWrapper::ModBusWrapper(std::string ip, int port, int slave_id) {
 		} else { 
 			throw std::bad_alloc();
 		}
-	} else {/*
+	} else {
 		if (modbus_set_slave(mb, slave_id)) {
 			if (modbus_connect(mb) == -1) {
 				modbus_free(mb);
@@ -28,17 +28,17 @@ ModBusWrapper::ModBusWrapper(std::string ip, int port, int slave_id) {
 			} else {
 				throw std::exception("It failed, but no idea why");
 			}
-		}*/
+		}
 	}
 }
 
 ModBusWrapper::~ModBusWrapper(void) {
-	//modbus_close(mb);
-	//modbus_free(mb);
+	modbus_close(mb);
+	modbus_free(mb);
 }
 
 void ModBusWrapper::readRegisters(int addr_of_first_reg, int num_regs, float *buffer) {
-	/*uint16_t *buff16;
+	uint16_t *buff16;
 	buff16 = new uint16_t[num_regs];
 	if (!modbus_read_input_registers(mb, first_reg, las_reg, buff16)) {
 		int errsv = errno;
@@ -53,5 +53,4 @@ void ModBusWrapper::readRegisters(int addr_of_first_reg, int num_regs, float *bu
 	
 	
 	delete[] buff16;
-*/
 }

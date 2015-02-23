@@ -2,6 +2,7 @@
 #define MODBUSWRAPPER_H
 
 #include <string>
+#include <modbus.h>
 
 class ModBusWrapper {
 	public:
