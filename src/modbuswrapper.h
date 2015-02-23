@@ -1,15 +1,15 @@
-#ifndef TÄÄ_FILU_H_
-#define TÄÄ_FILU_H_
+#ifndef MODBUSWRAPPER_H
+#define MODBUSWRAPPER_H
 
-#include se_oikee_modbus.h
+#include <string>
 
 class ModBusWrapper {
 	public:
-		ModBusWrapper(string, int, int)
+		ModBusWrapper(std::string ip, int port, int slave_id);
 		~ModBusWrapper();
-		void readRegisters(int, int, *float);
+		void readRegisters(int addr_of_first_reg, int num_regs, float *buffer);
 	private:
 		modbus_t *mb
-}
+};
 
-#endif // TÄÄ_FILU_H_
+#endif // MODBUSWRAPPER_H
