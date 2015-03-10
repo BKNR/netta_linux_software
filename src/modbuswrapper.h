@@ -10,7 +10,8 @@ class ModBusWrapper {
 		~ModBusWrapper();
 		void readRegisters(int addr_of_first_reg, int num_regs, float *buffer);
 	private:
-		modbus_t *mb
+		float registerCombinator(uint16_t lsb, uint16_t msb);
+		modbus_t *mb;
 };
 
 #endif // MODBUSWRAPPER_H
