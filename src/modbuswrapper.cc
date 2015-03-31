@@ -1,3 +1,12 @@
+/*
+* modbuswrapper.h & modbuswrapper.h:
+* A C++ wrapper class for libmodbus. Creates the modbus tcp context and connects
+* in the constructor, closes the connection and frees the modbus context in the
+* destructor. Implements modbus_read_input_registers.
+*
+* Jari Leppänen 2015 for use with Pegasor Netta
+*/
+
 #include "modbuswrapper.h"
 #include <string>
 #include <cstdint>
@@ -6,15 +15,13 @@
 #include <cstring>
 #include <array>
 
-ModBusWrapper::ModBusWrapper(std::string ip, int port, int slave_id) {
-	const char* ipstring = ip.c_str();
-	
-	mb = modbus_new_tcp("192.168.11.80", port);
+ModBusWrapper::ModBusWrapper(const char *ip, int port, int slave_id) {
+	mb = modbus_new_tcp(ipstring, port); // creates the data structure for modbus	
 	
 	if (mb == NULL) {
 		int errsv = errno;
 
-		if (errsv == EINVAL) {
+		if (errvs == EINVAL) {
 			throw std::invalid_argument("An invalid IP address was given");
 		} else { 
 			throw std::bad_alloc();
@@ -69,6 +76,10 @@ void ModBusWrapper::readRegisters(int addr_of_first_reg, int num_regs, float *ou
 	delete[] buff16;
 }
 
+/*
+* Combines the MSB and the LSB 16-bit register values into 
+* a single 32-bit float.
+*/
 float ModBusWrapper::registerCombinator(uint16_t lsb, uint16_t msb) {
 	uint32_t i;
 	float f;
