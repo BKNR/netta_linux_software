@@ -16,7 +16,7 @@
 #include <array>
 
 ModBusWrapper::ModBusWrapper(const char *ip, int port, int slave_id) {
-	mb = modbus_new_tcp(ipstring, port); // creates the data structure for modbus	
+	mb = modbus_new_tcp(ip, port); // creates the data structure for modbus	
 	
 	if (mb == NULL) {
 		int errsv = errno;
@@ -57,7 +57,7 @@ ModBusWrapper::~ModBusWrapper(void) {
 
 void ModBusWrapper::readRegisters(int addr_of_first_reg, int num_regs, float *output_buffer) {
 	
-	uint16_t *buff16 = new uint16_t[num_regs+128];
+	uint16_t *buff16 = new uint16_t[num_regs];
 	if (modbus_read_input_registers(mb, addr_of_first_reg, num_regs, buff16) != -1) {
 		for (int i = 0; i < num_regs/2; i++) {
 			output_buffer[i] = registerCombinator(buff16[2*i], buff16[2*i+1]);
