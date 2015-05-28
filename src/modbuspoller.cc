@@ -4,6 +4,8 @@
 #include <fstream>
 #include <exception>
 #include <string>
+#include <unistd.h>
+#include <cstring>
 
 #define NUM_REGS 64
 #define NETTA_IP "192.168.11.80"
@@ -38,8 +40,18 @@ int main(void) {
 		return -1;
 	}
 
+	char fname_buffer[64];
+	memset(fname_buffer, 0, 64);
+	readlink("/proc/self/exe", buffer, 64);
+
+	// Take the filename out of the path
+
+	string file_path(fname_buffer); 
+	file_path.erase(file_path.end()-12, file_path.end())
+
+	file_path += "measdata"
 	std::ofstream f;
-	f.open("measData", std::ios::trunc);
+	f.open(file_path, std::ios::trunc);
 	if (f.is_open()) {
 		for (int i = 0; i < values; i++) {
 			f << value_buffer[i] << "\n";
