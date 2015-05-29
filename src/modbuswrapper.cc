@@ -21,9 +21,9 @@ ModBusWrapper::ModBusWrapper(const char *ip, int port, int slave_id) {
 	if (mb == NULL) {
 		int errsv = errno;
 
-		if (errvs == EINVAL) {
+		if (errsv == EINVAL) {
 			throw std::invalid_argument("An invalid IP address was given");
-		} else { 
+		} else {
 			throw std::bad_alloc();
 		}
 	} else {

@@ -42,14 +42,14 @@ int main(void) {
 
 	char fname_buffer[64];
 	memset(fname_buffer, 0, 64);
-	readlink("/proc/self/exe", buffer, 64);
+	readlink("/proc/self/exe", fname_buffer, 64);
 
 	// Take the filename out of the path
 
-	string file_path(fname_buffer); 
-	file_path.erase(file_path.end()-12, file_path.end())
+	std::string file_path(fname_buffer);
+	file_path.erase(file_path.end()-12, file_path.end());
 
-	file_path += "measdata"
+	file_path += "measdata";
 	std::ofstream f;
 	f.open(file_path, std::ios::trunc);
 	if (f.is_open()) {
